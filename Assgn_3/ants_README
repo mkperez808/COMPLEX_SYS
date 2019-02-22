@@ -1,0 +1,27 @@
+Matthew Perez
+Assignment 3
+
+1)
+I created ants_lang_basic.py which simulates the Turmite in Langton's Ant.
+I created an ant class with variables:
+	-direction, position, and color.
+The ant class also has a function "step" which changes the color of the board, changes the ant's direction, and moves the ant on the board.
+
+There are 3 global functions which initialize, draw, and step through the model. These functions are passed to pycxsimulator and are executed within the start function of the GUI object.
+I create these functions following a similar procedure to abm-ants.py which is an example script provided in the pycx root directory.
+
+Some limitations of this approach are:
+	1) No wrap boundary. I currently have boundary detection which ends the program when an ant reaches the end of the board, simulating the ant "falling off of the board".
+	2) Due to the limitation of (1) I choose to initialize the ant in the middle of the board. I randomize direction, however, the starting positioning is constrained to the center of the board to ensure long simulation runs and eventually seeing the building of the "highway"
+	3) I can simulate only 1 ant
+
+
+2)
+For my improvement I decided to change the color of the board. Black and white is boring, so I played around with the colormap so that the board is multicolored. To preserve the underlying "black and white functionality" which determines ant direction, I use a counter for each square on the board, which is increased by 1 when an ant moves over it. Additionally the counter is modulo'd with the value 2 to determine the binary value of the board (i.e. black or white).
+
+I played around with different color schemes and found that cyclical colormaps create very artsy patterns. Using sequential patterns ends up modeling a heat map which you can use to visualize where the ant stepped the most. Note: ensure normalize is on (default) so that the board updates the color scheme as new upper bounds for square counters are reached. Also all images were generated using a single ant with a random starting position (board wrapping is enabled).
+	For visual examples of a HeatMap see Hot_*
+	For visual examples of a trippy pattern see Prism_*
+
+
+I also created a wrap around function so that the ant doesn't fall of the board anymore using the modulo function when updating the ant's position on the board. With this functionality I add the feature of initilizing an ant with a random position on the board. Additionally I made it so that multiple ants cant be generated using an ant_list to keep track of agents in the system.
